@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.bfs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,55 +6,62 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj1697 {
+public class boj12851 {
 	static class Pair {
 		int x;
 		int cnt;
 	}
-	static int N, K, ans;
+
+	static int N, K, ans, method;
 	static boolean visit[] = new boolean[100001];
 
 	static void bfs() {
 		Queue<Pair> q = new LinkedList<>();
+
 		Pair p = new Pair();
 		Pair np = null;
 		p.x = N;
 		p.cnt = 0;
-
 		q.add(p);
-		visit[N] = true;
+		ans = 1000000000;
+
 		while (!q.isEmpty()) {
-			p = q.peek();
+			int x = q.peek().x;
+			int cnt = q.peek().cnt;
 			q.remove();
 
-			if (p.x == K) {
-				ans = p.cnt;
-				return;
+			visit[x] = true;
+			if (x == K) {
+				if (ans > cnt) {
+					ans = cnt;
+					method = 1;
+				} else if (ans == cnt)
+					method++;
 			}
-			int nx1 = p.x - 1;
-			int nx2 = p.x + 1;
-			int nx3 = p.x * 2;
 
-			if (nx1 >= 0 && !visit[nx1]) {
+			if (ans != -1 && ans < cnt)
+				return;
+
+			if (x - 1 >= 0 && !visit[x - 1]) {
 				np = new Pair();
-				np.x = nx1;
-				np.cnt = p.cnt + 1;
+				np.x = x - 1;
+				np.cnt = cnt + 1;
+
 				q.add(np);
-				visit[nx1] = true;
 			}
-			if (nx2 <= 100000 && !visit[nx2]) {
+			if (x + 1 <= 100000 && !visit[x + 1]) {
 				np = new Pair();
-				np.x = nx2;
-				np.cnt = p.cnt + 1;
+				np.x = x + 1;
+				np.cnt = cnt + 1;
+
 				q.add(np);
-				visit[nx2] = true;
 			}
-			if (nx3 <= 100000 && !visit[nx3]) {
+			if (x * 2 <= 100000 && !visit[x * 2]) {
 				np = new Pair();
-				np.x = nx3;
-				np.cnt = p.cnt + 1;
+				np.x = x * 2;
+				np.cnt = cnt + 1;
+
 				q.add(np);
-				visit[nx3] = true;
 			}
 		}
 	}
@@ -67,6 +74,9 @@ public class boj1697 {
 		K = Integer.parseInt(st.nextToken());
 
 		bfs();
+		if (ans == -1)
+			ans = 0;
 		System.out.println(ans);
+		System.out.println(method);
 	}
 }

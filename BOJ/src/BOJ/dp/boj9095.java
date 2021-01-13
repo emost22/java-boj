@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.dp;
 
 import java.io.*;
 
