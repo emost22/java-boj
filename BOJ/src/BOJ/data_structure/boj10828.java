@@ -1,4 +1,4 @@
-package BOJ.자료구조;
+package BOJ.data_structure;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
