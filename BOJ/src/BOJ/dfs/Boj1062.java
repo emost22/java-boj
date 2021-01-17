@@ -44,7 +44,7 @@ public class Boj1062 {
 			if (alpha[i - 'a'])
 				continue;
 			alpha[i - 'a'] = true;
-			dfs((char) ((int) i + 1), cnt - 1);
+			dfs((char) (i + 1), cnt - 1);
 			alpha[i - 'a'] = false;
 		}
 	}
