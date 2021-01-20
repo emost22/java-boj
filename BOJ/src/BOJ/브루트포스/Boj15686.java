@@ -1,4 +1,4 @@
-package BOJ.구현;
+package BOJ.브루트포스;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
