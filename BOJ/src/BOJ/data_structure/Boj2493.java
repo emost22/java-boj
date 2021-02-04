@@ -11,30 +11,33 @@ public class Boj2493 {
 	static StringTokenizer st;
 	static StringBuffer sb = new StringBuffer();
 	static Stack<Integer> s = new Stack<>();
-	static int list[];
+	static int list[], ans[];
 	static int N;
 
-	static void func() {
+	static void print() {
 		for (int i = 0; i < N; i++) {
-			while (!s.isEmpty() && list[s.peek()] < list[i])
-				s.pop();
-
-			if (s.isEmpty()) {
-				s.push(i);
-				sb.append("0 ");
-			} else {
-				sb.append(s.peek() + 1 + " ");
-				s.push(i);
-			}
+			sb.append(ans[i] + " ");
 		}
 
 		System.out.println(sb.toString());
+	}
+
+	static void func() {
+		for (int i = N - 1; i >= 0; i--) {
+			while (!s.isEmpty() && list[s.peek()] < list[i]) {
+				ans[s.peek()] = i + 1;
+				s.pop();
+			}
+
+			s.push(i);
+		}
 	}
 
 	static void input() throws IOException {
 		st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		list = new int[N];
+		ans = new int[N];
 
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
@@ -45,5 +48,6 @@ public class Boj2493 {
 	public static void main(String[] args) throws IOException {
 		input();
 		func();
+		print();
 	}
 }
