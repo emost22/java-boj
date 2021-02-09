@@ -22,12 +22,12 @@ public class Boj1068 {
 
 		for (int i = 0; i < list[v].size(); i++) {
 			int next = list[v].get(i);
-			
-			if(list[v].size()==1 && next == deleteNode) {
+
+			if (list[v].size() == 1 && next == deleteNode) {
 				ans++;
 				return;
 			}
-			
+
 			dfs(next);
 		}
 	}
