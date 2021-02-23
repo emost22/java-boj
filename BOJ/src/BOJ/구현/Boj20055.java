@@ -14,7 +14,6 @@ public class Boj20055 {
 		int l = 1;
 		int r = N;
 		for (int t = 1;; t++) {
-
 			l--;
 			r--;
 			if (l == 0)
