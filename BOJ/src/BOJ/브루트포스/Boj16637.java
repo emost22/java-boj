@@ -50,7 +50,7 @@ public class Boj16637 {
 
 		ans = Math.max(ans, sum);
 	}
-
+ 
 	static void func(int s) {
 		solve();
 		for (int i = s; i < N - 1; i += 2) {
