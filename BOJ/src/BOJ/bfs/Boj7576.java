@@ -32,7 +32,7 @@ public class Boj7576 {
 						continue;
 					if (list[nx][ny] == -1 || visit[nx][ny])
 						continue;
-
+ 
 					visit[nx][ny] = true;
 					dq.addLast(new int[] { nx, ny });
 					ans--;
