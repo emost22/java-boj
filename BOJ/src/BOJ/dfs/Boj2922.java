@@ -23,22 +23,20 @@ public class Boj2922 {
 			if (a == 2) {
 				dfs(idx + 1, 0, 1, sum * 5, lChk);
 			} else if (b == 2) {
-				if(lChk) {
+				if (lChk) {
 					dfs(idx + 1, 1, 0, sum * 21, lChk);
-				}
-				else {
+				} else {
 					dfs(idx + 1, 1, 0, sum * 20, lChk);
-					dfs(idx + 1, 1, 0, sum, true);	
+					dfs(idx + 1, 1, 0, sum, true);
 				}
 			} else {
-				if(lChk) {
+				if (lChk) {
 					dfs(idx + 1, a + 1, 0, sum * 21, lChk);
 					dfs(idx + 1, 0, b + 1, sum * 5, lChk);
-				}
-				else {
+				} else {
 					dfs(idx + 1, a + 1, 0, sum * 20, lChk);
 					dfs(idx + 1, 0, b + 1, sum * 5, lChk);
-					dfs(idx + 1, a + 1, 0, sum, true);	
+					dfs(idx + 1, a + 1, 0, sum, true);
 				}
 			}
 		} else if (ch[idx] == 'A' || ch[idx] == 'E' || ch[idx] == 'I' || ch[idx] == 'O' || ch[idx] == 'U') {
@@ -48,7 +46,7 @@ public class Boj2922 {
 		} else {
 			if (a == 2)
 				return;
-			if(ch[idx]=='L')
+			if (ch[idx] == 'L')
 				dfs(idx + 1, a + 1, 0, sum, true);
 			else
 				dfs(idx + 1, a + 1, 0, sum, lChk);
