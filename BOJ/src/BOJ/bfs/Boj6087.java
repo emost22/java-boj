@@ -3,7 +3,6 @@ package BOJ.bfs;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.Comparator;
 import java.util.Deque;
 import java.util.StringTokenizer;
 
