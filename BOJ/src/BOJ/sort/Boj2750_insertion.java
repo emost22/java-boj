@@ -19,18 +19,17 @@ public class Boj2750_insertion {
 	}
 
 	static void insertionSort() {
-		for (int i = 0; i < N; i++) {
-			int idx = i;
-			for (int j = i - 1; j >= 0; j--) {
-				if (list[idx] < list[j]) {
-					int tmp = list[idx];
-					list[idx] = list[j];
-					list[j] = tmp;
-					idx = j;
+		for (int i = 1; i < N; i++) {
+			int tmp = list[i];
+			int j = i - 1;
+			for (; j >= 0; j--) {
+				if (list[j] > tmp) {
+					list[j + 1] = list[j];
 				}
 				else
 					break;
 			}
+			list[j + 1] = tmp;
 		}
 	}
 
