@@ -17,7 +17,7 @@ public class Boj2750_bubble {
 
 		System.out.println(sb.toString());
 	}
-
+ 
 	static void bubbleSort() {
 		for (int i = 0; i < N; i++) {
 			for (int j = 1; j < N - i; j++) {
