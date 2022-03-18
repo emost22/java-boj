@@ -3,3 +3,5 @@
 .project
 .settings/org.eclipse.jdt.core.prefs
 bin
+src/Main.java
+src/Solution.java
