@@ -71,10 +71,6 @@ public class Boj1989 {
 
     private static Ans query(int s, int e) {
         if (s > e) return new Ans(-1L, -1, -1);
-        if (s == 1 && e == 1) {
-            int a = 0;
-            a++;
-        }
 
         int idx = getMinIndexOfArray(1, 1, N, s, e);
         Ans ret = new Ans(queryOfSumTree(1, 1, N, s, e) * list[idx], s, e);
