@@ -7,85 +7,79 @@ import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Boj6087 {
-	static class Pair {
-		int x;
-		int y;
-		int d;
-		int cnt;
+    private static class Pair {
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
 
-		public Pair(int x, int y, int d, int cnt) {
-			this.x = x;
-			this.y = y;
-			this.d = d;
-			this.cnt = cnt;
-		}
-	}
+        int x;
+        int y;
+    }
 
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static StringTokenizer st;
-	static Deque<Pair> dq = new ArrayDeque<>();
-	static char list[][] = new char[101][101];
-	static int dis[][] = new int[101][101];
-	static int direct[][] = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-	static int N, M, ex, ey;
+    private final static int MAX = 101;
+    private static Deque<Pair> dq = new ArrayDeque<>();
+    private static char list[][] = new char[MAX][MAX];
+    private static int dis[][] = new int[MAX][MAX];
+    private static int direct[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    private static int N, M, ex, ey;
 
-	static void bfs() {
-		while (!dq.isEmpty()) {
-			int x = dq.peek().x;
-			int y = dq.peek().y;
-			int d = dq.peek().d;
-			int cnt = dq.poll().cnt;
+    private static boolean isInner(int x, int y) {
+        return x >= 0 && y >= 0 && x < N && y < M;
+    }
 
-			for (int i = 0; i < 4; i++) {
-				int nx = x + direct[i][0];
-				int ny = y + direct[i][1];
-				int ncnt = cnt;
-				if (nx < 0 || ny < 0 || nx >= N || ny >= M)
-					continue;
-				if (list[nx][ny] == '*')
-					continue;
-				if (d != i)
-					ncnt++;
-				if (dis[nx][ny] < ncnt)
-					continue;
+    private static void bfs() {
+        while (!dq.isEmpty()) {
+            int x = dq.peek().x;
+            int y = dq.poll().y;
 
-				dq.add(new Pair(nx, ny, i, ncnt));
-				dis[nx][ny] = ncnt;
-			}
-		}
-		
-		System.out.println(dis[ex][ey]);
-	}
+            if (dis[ex][ey] != 0) {
+                System.out.println(dis[ex][ey] - 1);
+                return;
+            }
 
-	static void input() throws Exception {
-		st = new StringTokenizer(br.readLine());
-		M = Integer.parseInt(st.nextToken());
-		N = Integer.parseInt(st.nextToken());
+            for (int d = 0; d < 4; d++) {
+                int nx = x;
+                int ny = y;
+                while (true) {
+                    nx += direct[d][0];
+                    ny += direct[d][1];
 
-		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine());
-			list[i] = st.nextToken().toCharArray();
-			for (int j = 0; j < M; j++) {
-				if (list[i][j] == 'C') {
-					if (dq.isEmpty()) {
-						dq.add(new Pair(i, j, 0, 0));
-						dq.add(new Pair(i, j, 1, 0));
-						dq.add(new Pair(i, j, 2, 0));
-						dq.add(new Pair(i, j, 3, 0));
-						dis[i][j] = 0;
-					} else {
-						ex = i;
-						ey = j;
-						dis[i][j] = Integer.MAX_VALUE;
-					}
-				}
-				dis[i][j] = Integer.MAX_VALUE;
-			}
-		}
-	}
+                    if (!isInner(nx, ny) || list[nx][ny] == '*') break;
+                    if (dis[nx][ny] != 0) continue;
 
-	public static void main(String[] args) throws Exception {
-		input();
-		bfs();
-	}
+                    dis[nx][ny] = dis[x][y] + 1;
+                    dq.add(new Pair(nx, ny));
+                }
+            }
+        }
+    }
+
+    private static void input() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            list[i] = st.nextToken().toCharArray();
+            for (int j = 0; j < M; j++) {
+                if (list[i][j] == 'C') {
+                    if (dq.isEmpty()) {
+                        dq.add(new Pair(i, j));
+                    } else {
+                        ex = i;
+                        ey = j;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        input();
+        bfs();
+    }
 }
